@@ -37,24 +37,13 @@ leetcode: 20
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 '''
 
-#class Solution:
-#    def isValid(self, s: str) -> bool:
-#        stack = []
-#        paren_map = {')':'(',']':'[','}':'{'}
-#        for c in s:
-#            if c not in paren_map:
-#                stack.append(c)
-#            elif not stack or paren_map[c] != stack.pop():
-#                return False
-#        return not stack
-
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
         paren_map = {')':'(',']':'[','}':'{'}
         for c in s:
-            if c not in paren_map:
-                stack.append(c)
-            elif not stack or paren_map[c] != stack.pop():
-                return False
-        return not stack
+            if c is not paren_map:
+                s = stack.append(c)
+            elif not stack or paren_map != stack.pop():
+                return false
+        return true
