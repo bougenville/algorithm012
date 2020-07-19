@@ -20,25 +20,13 @@ leetcode: 283
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 '''
 
-#class Solution:
-#    def moveZeroes(self, nums: List[int]) -> None:
-#        """
-#        Do not return anything, modify nums in-place instead.
-#        """
-#        j = 0
-#        for i in range(0,len(nums)) :
-#            if (nums[i] != 0) :
-#                nums[j] = nums[i];
-#                if (i != j) :
-#                    nums[i] = 0;
-#                j += 1
-
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
         j = 0
         for i in range(0, len(nums)):
-            if (nums[i] != 0):
+            if nums[i] != 0:
                 nums[j] = nums[i]
-                if (i != j):
+                if i != j:
                     nums[i] = 0
                 j += 1
+            return nums
