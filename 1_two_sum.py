@@ -20,22 +20,12 @@ leetcode: 1
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 '''
 
-#class Solution:
-#    def twoSum(self, nums: List[int], target: int) -> List[int]:
-#        h = {}
-#        for x,num in enumerate(nums):
-#            h[num] = x
-#        for i,num in enumerate(nums):
-#            j = h.get(target - num)
-#            if j and i != j:
-#                return [i,j]
-
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         h = {}
-        for x, num in enumerate(nums):
-            h[num] = x
+        for k, num in enumerate(nums):
+            nums[k] = num
         for i, num in enumerate(nums):
             j = h.get(target - num)
             if j and i != j:
-                return [i,j]
+                return [i, j]
