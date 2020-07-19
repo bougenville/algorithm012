@@ -29,4 +29,3 @@ class Solution:
                 if i != j:
                     nums[i] = 0
                 j += 1
-            return nums
