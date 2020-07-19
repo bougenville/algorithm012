@@ -24,8 +24,8 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         h = {}
         for k, num in enumerate(nums):
-            nums[k] = num
+            h[num] = k
         for i, num in enumerate(nums):
             j = h.get(target - num)
             if j and i != j:
-                return [i, j]
+                return [i,j]
