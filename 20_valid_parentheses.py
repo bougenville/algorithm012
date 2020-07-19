@@ -42,8 +42,8 @@ class Solution:
         stack = []
         paren_map = {')':'(',']':'[','}':'{'}
         for c in s:
-            if c is not paren_map:
-                s = stack.append(c)
-            elif not stack or paren_map != stack.pop():
-                return false
-        return true
+            if c not in paren_map:
+                stack.append(c)
+            elif not stack or paren_map[c] != stack.pop():
+                return False
+        return not stack
