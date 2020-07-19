@@ -20,3 +20,5 @@
 6. 一周后重复一次，git 提交记录中标记为 `+4`
 6. 两周后重复一次，git 提交记录中标记为 `+5`
 5. 工作日每天至少两道题，休息日每天至少五道题。
+
+![五毒神掌示例](https://github.com/bougenville/algorithm012/blob/%E4%BA%94%E6%AF%92%E7%A5%9E%E6%8E%8C/wdsz.png?raw=true)
