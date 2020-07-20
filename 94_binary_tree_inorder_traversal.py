@@ -22,21 +22,15 @@ leetcode: 94
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 '''
 
-## Definition for a binary tree node.
-## class TreeNode:
-##     def __init__(self, x):
-##         self.val = x
-##         self.left = None
-##         self.right = None
-#
-#class Solution:
-#    def inorderTraversal(self, root: TreeNode) -> List[int]:
-#        def helper(root):
-#            return helper(root.left) + [root.val] + helper(root.right) if root else []
-#        return helper(root)
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         def helper(root):
-            return helper(root.left) + [root.val] + helper(root.right) if root else []
+            return helper(root.left) + root.val + helper(root.right) if root else []
         return helper(root)
