@@ -32,5 +32,5 @@ leetcode: 94
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         def helper(root):
-            return helper(root.left) + root.val + helper(root.right) if root else []
+            return helper(root.left) + [root.val] + helper(root.right) if root else []
         return helper(root)
