@@ -19,11 +19,6 @@ leetcode: 125
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 '''
 
-#class Solution:
-#    def isPalindrome(self, s: str) -> bool:
-#        res = "".join(c.lower() for c in s if c.isalnum())
-#        return res == res[::-1]
-
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         res = ''.join(c.lower() for c in s if c.isalnum())
