@@ -21,23 +21,16 @@ leetcode: 111
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 '''
 
-## Definition for a binary tree node.
-## class TreeNode:
-##     def __init__(self, x):
-##         self.val = x
-##         self.left = None
-##         self.right = None
-#
-#class Solution:
-#    def minDepth(self, root: TreeNode) -> int:
-#        if not root: return 0
-#        left = self.minDepth(root.left)
-#        right = self.minDepth(root.right)
-#        return left + right  + 1 if (left == 0 or right == 0) else min(left, right) + 1
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
         if not root: return 0
-        left = self.minDepth(root.left)
-        right = self.minDepth(root.right)
-        return left + right + 1 if (left == 0 or right == 0) else min(left, right) + 1
+        left = self.minDepth(root, left)
+        right = self.minDepth(root, right)
+        return left + right +1 if (left ==0 or right ==0) else min(left, right) + 1
