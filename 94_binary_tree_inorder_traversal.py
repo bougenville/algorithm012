@@ -1,9 +1,7 @@
 '''
 leetcode: 94
-'''
 
-'''
-给定一个二叉树，返回它的中序 遍历。
+给定一个二叉树，返回它的中序遍历。
 
 示例:
 
@@ -34,3 +32,6 @@ class Solution:
         def helper(root):
             return helper(root.left) + [root.val] + helper(root.right) if root else []
         return helper(root)
+#        def helper(root):
+#            return helper(root.left) + [root.val] + helper(root.right) if root else []
+#        return helper(root)
