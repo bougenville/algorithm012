@@ -57,28 +57,26 @@ class Solution:
 - [15. 三数之和](https://leetcode-cn.com/problems/3sum/)
 ```python
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        ans = []
-        counts = {}
-        for i in nums:
-            counts[i] = counts.get(i, 0) + 1
-        nums = sorted(counts)
-        for i, num in enumerate(nums):
-            if counts[num] > 1:
-                if num == 0:
-                    if counts[num] > 2:
-                        ans.append([0, 0, 0])
+    def threeSum(self, nums: [int]) -> [[int]]:
+        nums.sort()
+        res, i = [], 0
+        for i in range(len(nums) - 2):
+            if nums[i] > 0: break                               # 1. because of r > l > i.
+            if i > 0 and nums[i] == nums[i - 1]: continue       # 2. skip the same `nums[i]`.
+            l, r = i + 1, len(nums) - 1
+            while l < r:                                        # 3. double pointer
+                s = nums[i] + nums[l] + nums[r]
+                if s < 0:
+                    l += 1
+                elif s > 0:
+                    r -= 1
                 else:
-                    if -num * 2 in counts:
-                        ans.append([num, num, -2 * num])
-            if num < 0:
-                two_sum = -num
-                left = bisect.bisect_left(nums, (two_sum - nums[-1]), i + 1)
-                for i in nums[left: bisect.bisect_right(nums, (two_sum // 2), left)]:
-                    j = two_sum - i
-                    if j in counts and j != i:
-                        ans.append([num, i, j])
-        return ans
+                    res.append([nums[i], nums[l], nums[r]])
+                    l += 1
+                    r -= 1
+                    while l < r and nums[l] == nums[l - 1]: l += 1
+                    while l < r and nums[r] == nums[r + 1]: r -= 1
+        return res
 ```
 - [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 ```python
