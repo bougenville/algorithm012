@@ -33,13 +33,14 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        j = 0
-        for i in range(0,len(nums)) :
-            if (nums[i] != 0) :
-                nums[j] = nums[i];
-                if (i != j) :
-                    nums[i] = 0;
-                j += 1
+		if not nums: return 0
+		# 两个指针 i 和 j
+		j = 0
+		for i in range(len(nums)):
+			# 当前元素 != 0，就把其交换到左边，等于 0 的交换到右边
+			if nums[i]:
+				nums[j], nums[i] = nums[i], nums[j]
+				j += 1
 ```
 - [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 ```python
