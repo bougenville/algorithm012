@@ -135,7 +135,7 @@ class Solution:
             cur = cur.next
         pre = head
         itera = head.next
-        for _ in range(k-1):
+        for _ in range(k - 1):
             next = itera.next
             itera.next = pre
             pre = itera
