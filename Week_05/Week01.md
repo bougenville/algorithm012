@@ -146,30 +146,15 @@ class Solution:
 - [22. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 ```python
 class Solution:
-    def generateParenthesis(self, n: int) -> List[str]:
-
-        res = []
-        cur_str = ''
-
-        def dfs(cur_str, left, right):
-            """
-            :param cur_str: 从根结点到叶子结点的路径字符串
-            :param left: 左括号还可以使用的个数
-            :param right: 右括号还可以使用的个数
-            :return:
-            """
-            if left == 0 and right == 0:
-                res.append(cur_str)
-                return
-            if right < left:
-                return
-            if left > 0:
-                dfs(cur_str + '(', left - 1, right)
-            if right > 0:
-                dfs(cur_str + ')', left, right - 1)
-
-        dfs(cur_str, n, n)
-        return res
+    def isValid(self, s: str) -> bool:
+        stack = []
+        paren_map = {')':'(',']':'[','}':'{'}
+        for c in s:
+            if c not in paren_map:
+                stack.append(c)
+            elif not stack or paren_map[c] != stack.pop():
+                return False
+        return not stack
 ```
 - [155. 最小栈](https://leetcode-cn.com/problems/min-stack/)
 ```python
