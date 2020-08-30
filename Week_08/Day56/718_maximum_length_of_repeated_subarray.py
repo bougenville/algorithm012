@@ -1,0 +1,50 @@
+'''
+leetcode: 718
+
+给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。
+
+示例： 输入：
+A: [1,2,3,2,1]
+B: [3,2,1,4,7]
+输出：3
+
+解释： 长度最长的公共子数组是 [3, 2, 1] 。
+
+提示：
+
+1. 1 <= len(A), len(B) <= 1000
+2. 0 <= A[i], B[i] < 100
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+'''
+
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+
+        def maxLength(beginA:int, beginB:int, length:int):
+            ret = 0
+            k = 0
+            for i in range(length):
+                if A[beginA+i] == B[beginB+i]:
+                    k += 1
+                    ret = max(ret,k)
+                else:
+                    k = 0
+            return ret
+
+        m, n = len(A), len(B)
+        count = 0
+
+        for i in range(m):
+            length = min(n, m-i)
+            if length > count:
+                count = max(maxLength(i, 0, length), count)
+
+        for j in range(n):
+            length = min(m, n-j)
+            if length > count:
+                count = max(maxLength(0, j, length), count)
+
+        return count
