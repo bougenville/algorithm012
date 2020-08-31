@@ -30,45 +30,51 @@ words = ["oath","pea","eat","rain"] and board =
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 '''
 
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+END_OF_WORD = "#"
+
 class Solution:
+
     def findWords(self, board, words) :
-        WORD_END = '#'
-        self.memo={}
+        if not board or not board[0]: return []
+        if not words: return []
+        self.result = set()
 
+        # 构建 Trie
+        root = collections.defaultdict()
         for word in words:
-            cur_node = self.memo
-            for letter in word:  #下面三行等效于cur_node=setdefault(letter,{})
-                if letter not in cur_node:
-                    cur_node[letter] = {}  #新建一个
-                cur_node = cur_node[letter]  #不管有没有，进一位
-            cur_node[WORD_END] = word  #表示这个单词结束,记录单词日后好调用
+            node = root
+            for char in word:
+                node = node.setdefault(char, collections.defaultdict())
+            node[END_OF_WORD] = END_OF_WORD
 
-        row_num, column_num, ans = len(board), len(board[0]), []
+        self.m, self.n = len(board), len(board[0])
+        for i in xrange(self.m):
+            for j in xrange(self.n):
+                if board[i][j] in root:
+                    self._dfs(board, i, j, "", root)
+        return list(self.result)
 
-        def backtrack(row, col, parent):
-            letter = board[row][col]
-            cur_node = parent[letter]
+        def _dfs(self, board, i, j, cur_word, cur_dict):
+            cur_word += board[i][j]
+            cur_dict = cur_dict[board[i][j]]
+            if END_OF_WORD in cur_dict:
+                self.result.add(cur_word)
+            tmp, board[i][j] = board[i][j], '@'
+            for k in xrange(4):
+                x, y = i + dx[k], j + dy[k]
+                if 0 <= x < self.m and 0 <= y < self.n \
+                        and board[x][y] != '@' and board[x][y] in cur_dict:
+                            self._dfs(board, x, y, cur_word, cur_dict)
+            board[i][j] = tmp
 
-            if WORD_END in cur_node:
-                ans.append(cur_node[WORD_END])  #当时记录的是那个完整单词
-                cur_node.pop(WORD_END)  #剪枝
 
-            board[row][col] = '#'  #代表被占用了，防止后续转回来
 
-            for (delta_x, delta_y) in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
-                next_row, next_col = row + delta_x, col + delta_y
-                if not (0 <= next_row < row_num and 0 <= next_col < column_num): continue
-                elif board[next_row][next_col] not in cur_node: continue
-                else: backtrack(next_row, next_col, cur_node)
-
-            board[row][col]=letter  #还原回去
-
-            if not cur_node:  #这个是剪枝，从后往前剪枝
-                parent.pop(letter)
-
-        for row in range(row_num):
-            for col in range(column_num):
-                if board[row][col] in self.memo:
-                    backtrack(row, col, self.memo)
-
-        return ans
+# 1. words  遍历  -->  board search
+# O(N*m*m*4^k)
+#
+# 2. trie
+# a. all words  -->  trie  构建起 prefix
+# b. board, DFS
+# O(?)
